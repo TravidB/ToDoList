@@ -30,6 +30,7 @@ public class Todo {
                     continue;
                 }
             }
+            //test
         }
 
         return list2;
@@ -63,7 +64,8 @@ public class Todo {
             } else if (input == 2){
                 System.out.println("Name removed item");
                 String removedItem = in.next();
-                System.out.println("removed " + list.remove(removedItem));
+                //System.out.println("removed " + list.remove(removedItem));
+                list = removeHash(list, removedItem);
             } else if (input == 3){
                 
                 System.out.println("Input name of checked item: ");
