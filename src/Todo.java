@@ -16,24 +16,25 @@ public class Todo {
         System.out.println("-1. to end the application");
     }
 
-    public static ArrayList<HashMap<String, Integer>> removeHash(ArrayList<HashMap<String, Integer>> list2, String remove){
-        Iterator<HashMap<String, Integer>> it = list2.iterator();
+    public static ArrayList<HashMap<String, Integer>> removeHash(ArrayList<HashMap<String, Integer>> list, String remove){
         int index = 0;
+        Iterator<HashMap<String, Integer>> it = list.iterator();
 
         while(it.hasNext()){
             HashMap<String, Integer> item = it.next();
             for(String k : item.keySet()){
                 if(k.equals(remove)){
-                    list2.remove(index);
+                    break;
                 } else {
                     index++;
                     continue;
                 }
             }
+            list.remove(index);
             //test
         }
 
-        return list2;
+        return list;
     }
 
     public static String check(int c){
@@ -64,10 +65,8 @@ public class Todo {
             } else if (input == 2){
                 System.out.println("Name removed item");
                 String removedItem = in.next();
-                //System.out.println("removed " + list.remove(removedItem));
                 list = removeHash(list, removedItem);
             } else if (input == 3){
-                
                 System.out.println("Input name of checked item: ");
                 String checker = in.next();
                 list = removeHash(list, checker);
