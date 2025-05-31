@@ -1,0 +1,9 @@
+* [33m2e0c6be[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mremoveCore[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mremoveDetail[m[33m, [m[1;32mmain[m[33m)[m RemoveButton
+* [33md56f06b[m[33m ([m[1;31morigin/todo_GUI[m[33m, [m[1;32mtodo_GUI[m[33m)[m Todo base finished
+* [33m01f6bf6[m[33m ([m[1;32mremoveHash[m[33m, [m[1;32mfeature/login[m[33m)[m fix iterator loop(remove)
+* [33m1e0ff3b[m remove option
+* [33m85300c6[m[33m ([m[1;31morigin/removeHash[m[33m)[m check method
+* [33me1884ec[m create removeHash
+* [33ma80f179[m second init
+* [33m6142d3b[m basic frame
+* [33m8efa40a[m init

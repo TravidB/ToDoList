@@ -8,9 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -100,8 +107,20 @@ public class GUI {
         frame.setIconImage(image.getImage());  //change icon 
     }
 
-    public static void main(String [] args){     
-        new GUI();
+    public static void main(String [] args) throws IOException{ 
+        User user = new User();
+        user.name = "Guest";
+        user.password = "Secure";
+        //user.sayHello(); 
+        FileOutputStream fileOut = new FileOutputStream("UserInfo.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(user);
+        out.close();
+        fileOut.close();
+        
+        System.out.println("Data Saved!");
+
+        //new GUI();
     }
     
 }
