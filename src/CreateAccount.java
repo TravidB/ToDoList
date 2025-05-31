@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.concurrent.Flow;
 
@@ -68,6 +70,8 @@ private JLabel label;
 
                     } catch (IOException error){
                         label.setText("Create Account, invalid input");
+                        userName.setText("");
+                        userPassword.setText("");
                     }
 
                 } else {
@@ -78,4 +82,5 @@ private JLabel label;
             }
         });
     }
+
 }

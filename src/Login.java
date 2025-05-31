@@ -4,6 +4,9 @@ import java.awt.*;
 import javax.swing.border.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class Login {
     private JLabel label;
@@ -14,6 +17,7 @@ public class Login {
     protected String fieldPasswordInput;
 
     public Login(){
+        User savedUser = saveUserData("UserInfo.ser");
         frame = new JFrame();
 
         label = new JLabel("Login: ");
@@ -48,7 +52,7 @@ public class Login {
                 fieldNameInput = fieldName.getText();
                 fieldPasswordInput = fieldPassword.getText();
 
-                if(fieldNameInput.equals("Player") && fieldPasswordInput.equals("Password123")){
+                if(fieldNameInput.equals(savedUser.getName()) && fieldPasswordInput.equals(savedUser.getPassword())){
                     fieldName.setText("");
                     fieldPassword.setText("");
                     JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component)e.getSource());
@@ -65,9 +69,20 @@ public class Login {
         createButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                frame = (JFrame) SwingUtilities.getWindowAncestor((Component)e.getSource());
                 new CreateAccount();
             }
         });
+    }
+
+    private User saveUserData(String fileName) {
+        // TODO Auto-generated method stub
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
+            return (User) in.readObject();
+        } catch (IOException | ClassNotFoundException e){
+             System.err.println("Failed to load user: " + e.getMessage());
+            return null;
+        }
     }
 
     public static void main(String[] args) {
