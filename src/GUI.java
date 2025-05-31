@@ -109,8 +109,8 @@ public class GUI {
 
     public static void main(String [] args) throws IOException{ 
         User user = new User();
-        user.name = "Guest";
-        user.password = "Secure";
+        user.name = ("Player");
+        user.password = ("Password123");
         //user.sayHello(); 
         FileOutputStream fileOut = new FileOutputStream("UserInfo.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
