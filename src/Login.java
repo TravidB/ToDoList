@@ -21,8 +21,10 @@ public class Login {
         label.setBorder(new LineBorder(Color.BLACK));
 
         JButton loginButton = new JButton("Login");
+        JButton createButton = new JButton("Create Account");
         panel = new JPanel();
         panel.add(loginButton);
+        panel.add(createButton);
         frame.getContentPane().add(panel);
         panel.setLayout(new FlowLayout());
         panel.add(Box.createHorizontalGlue());
@@ -57,6 +59,13 @@ public class Login {
                     fieldName.setText("");
                     fieldPassword.setText("");
                 }
+            }
+        });
+
+        createButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CreateAccount();
             }
         });
     }
