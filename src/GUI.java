@@ -58,7 +58,7 @@ public class GUI {
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("To Do List");
+        frame.setTitle("ToDoList");
         frame.pack();
         //frame.setBounds(100, 200, 800, 500);
         //frame.setResizable(false) prevents resize

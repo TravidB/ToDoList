@@ -87,5 +87,6 @@ public class Todo {
                     }
                     //System.out.println(key + " | " + item.get(key));
                 }
+            in.close();
     }
 }
