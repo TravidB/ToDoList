@@ -7,17 +7,16 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class Login {
     private JLabel label;
     private JFrame frame;
     private JPanel panel;
-    private JTextField field;
     protected String fieldNameInput;
     protected String fieldPasswordInput;
 
     public Login(){
-        User savedUser = saveUserData("UserInfo.ser");
         frame = new JFrame();
 
         label = new JLabel("Login: ");
@@ -52,16 +51,17 @@ public class Login {
                 fieldNameInput = fieldName.getText();
                 fieldPasswordInput = fieldPassword.getText();
 
-                if(fieldNameInput.equals(savedUser.getName()) && fieldPasswordInput.equals(savedUser.getPassword())){
-                    fieldName.setText("");
-                    fieldPassword.setText("");
-                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component)e.getSource());
-                    frame.dispose();
-                    new GUI();
-                } else {
-                    label.setText("Login, Try again"); 
-                    fieldName.setText("");
-                    fieldPassword.setText("");
+                for(User user : userStorage.loadUser()){
+                    if(fieldNameInput.equals(user.getName()) && fieldPasswordInput.equals(user.getPassword())){
+                        fieldName.setText("");
+                        fieldPassword.setText("");
+                        frame.dispose();
+                        new GUI();
+                    } else {
+                        label.setText("Login, Try again"); 
+                        fieldName.setText("");
+                        fieldPassword.setText("");
+                    }
                 }
             }
         });
@@ -69,7 +69,7 @@ public class Login {
         createButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame = (JFrame) SwingUtilities.getWindowAncestor((Component)e.getSource());
+                frame.dispose();
                 new CreateAccount();
             }
         });

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.concurrent.Flow;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -25,7 +26,7 @@ private JLabel label;
         label.setPreferredSize(new Dimension(200, 200));
         label.setBorder(new LineBorder(Color.BLACK));
 
-        JButton createAccountButton = new JButton("Create  Aaccount");
+        JButton createAccountButton = new JButton("Create  Account");
         panel = new JPanel();
         panel.add(createAccountButton);
         frame.getContentPane().add(panel);
@@ -56,22 +57,19 @@ private JLabel label;
                     user.name = fieldUserName;
                     user.password = fieldUserPassword;
                     try {
-                        FileOutputStream fileOut = new FileOutputStream("UserInfo.ser");
-                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                        out.writeObject(user);
-                        out.close();
-                        fileOut.close();
+                        userStorage.addUser(user);
 
                         label.setText("Create Account, succesfully created account");
                         userName.setText("");
                         userPassword.setText("");
-                        frame = (JFrame) SwingUtilities.getWindowAncestor((Component)e.getSource());
+                        frame.dispose();
                         new Login();
 
-                    } catch (IOException error){
+                    } catch (RuntimeException u){
                         label.setText("Create Account, invalid input");
                         userName.setText("");
                         userPassword.setText("");
+                        throw new RuntimeException("Couldn't serialize " + u);
                     }
 
                 } else {
