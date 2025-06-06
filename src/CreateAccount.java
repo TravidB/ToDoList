@@ -11,6 +11,7 @@ import java.util.concurrent.Flow;
 import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import java.util.List;
 
 public class CreateAccount {
 private JFrame frame;
@@ -52,26 +53,14 @@ private JLabel label;
                 fieldUserName = userName.getText();
                 fieldUserPassword = userPassword.getText();
 
-                if(!(fieldUserName.isEmpty()) && !(fieldUserPassword.isEmpty())){
-                    User user = new User();
-                    user.name = fieldUserName;
-                    user.password = fieldUserPassword;
-                    try {
-                        userStorage.addUser(user);
+                if(!(fieldUserName.isEmpty()) && !(fieldUserPassword.isEmpty())){   
+                    List<User> users = userStorage.loadUser();
+                    users.add(new User(fieldUserName, fieldUserPassword));
+                    userStorage.saveUser(users);
 
-                        label.setText("Create Account, succesfully created account");
-                        userName.setText("");
-                        userPassword.setText("");
-                        frame.dispose();
-                        new Login();
-
-                    } catch (RuntimeException u){
-                        label.setText("Create Account, invalid input");
-                        userName.setText("");
-                        userPassword.setText("");
-                        throw new RuntimeException("Couldn't serialize " + u);
-                    }
-
+                    label.setText("Account Created");
+                    new Login();
+                    frame.dispose();
                 } else {
                     userName.setText("");
                     userPassword.setText("");

@@ -6,6 +6,9 @@ public class userStorage {
     public static final String FILE_PATH = "UserInfo.ser";
 
     public static List<User> loadUser(){
+        File file = new File(FILE_PATH);
+        if(!file.exists()){ return new ArrayList<>();}
+
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream (FILE_PATH))){
             return (List<User>) in.readObject();
         } catch (IOException | RuntimeException | ClassNotFoundException e){

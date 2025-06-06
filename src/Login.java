@@ -53,10 +53,9 @@ public class Login {
 
                 for(User user : userStorage.loadUser()){
                     if(fieldNameInput.equals(user.getName()) && fieldPasswordInput.equals(user.getPassword())){
-                        fieldName.setText("");
-                        fieldPassword.setText("");
                         frame.dispose();
                         new GUI();
+                        return;
                     } else {
                         label.setText("Login, Try again"); 
                         fieldName.setText("");
@@ -73,16 +72,6 @@ public class Login {
                 new CreateAccount();
             }
         });
-    }
-
-    private User saveUserData(String fileName) {
-        // TODO Auto-generated method stub
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-            return (User) in.readObject();
-        } catch (IOException | ClassNotFoundException e){
-             System.err.println("Failed to load user: " + e.getMessage());
-            return null;
-        }
     }
 
     public static void main(String[] args) {
